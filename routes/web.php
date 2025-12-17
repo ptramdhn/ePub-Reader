@@ -15,7 +15,7 @@ Route::get('lang/{locale}', function ($locale) {
         Session::put('locale', $locale); // Simpan pilihan di Session
     }
     return redirect()->back(); // Kembali ke halaman sebelumnya
-});
+})->name('lang.switch');
 
 // Guest only (belum login)
 Route::middleware('guest')->group(function () { // <--- Tambahkan Route::
