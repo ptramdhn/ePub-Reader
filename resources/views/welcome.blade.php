@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ __('messages.welcome_title') ?? 'FST Library' }}</title>
+    <title>{{ __('messages.hero.title_1') }} - {{ __('messages.hero.title_2') }}</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:300,400,600,700,900&display=swap" rel="stylesheet" />
@@ -36,7 +36,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                             </svg>
                         </div>
-                        <input type="text" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-full leading-5 bg-gray-50 placeholder-gray-500 focus:outline-none focus:bg-white focus:border-uin-blue focus:ring-2 focus:ring-uin-blue/20 sm:text-sm transition-all dark:bg-gray-900 dark:border-gray-700 dark:placeholder-gray-400 dark:text-gray-100" placeholder="Cari judul buku, skripsi, atau jurnal...">
+                        <input type="text" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-full leading-5 bg-gray-50 placeholder-gray-500 focus:outline-none focus:bg-white focus:border-uin-blue focus:ring-2 focus:ring-uin-blue/20 sm:text-sm transition-all dark:bg-gray-900 dark:border-gray-700 dark:placeholder-gray-400 dark:text-gray-100" 
+                               placeholder="{{ __('messages.nav.search_placeholder') }}">
                     </div>
                 </div>
 
@@ -48,7 +49,7 @@
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="absolute right-0 top-full mt-2 w-32 bg-white dark:bg-gray-800 rounded shadow-xl border border-gray-100 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform origin-top-right z-50">
-                            <a href="/lang/id" class="block px-4 py-2 text-sm hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Bahasa Indonesia</a>
+                            <a href="/lang/id" class="block px-4 py-2 text-sm hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">Indonesia</a>
                             <a href="/lang/en" class="block px-4 py-2 text-sm hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-700">English</a>
                         </div>
                     </div>
@@ -61,20 +62,20 @@
                     <div class="border-l border-gray-200 dark:border-gray-700 pl-4 ml-2">
                         @if (Route::has('login'))
                             @auth
-                                <a href="{{ url('/dashboard') }}" class="flex items-center gap-2 group" title="Ke Dashboard">
+                                <a href="{{ url('/dashboard') }}" class="flex items-center gap-2 group" title="{{ __('messages.nav.account') }}">
                                     <div class="w-9 h-9 rounded-full bg-gradient-to-br from-uin-blue to-blue-600 flex items-center justify-center text-white font-bold text-sm shadow ring-2 ring-transparent group-hover:ring-uin-green transition-all">
                                         {{ substr(Auth::user()->name, 0, 1) }} </div>
                                     <span class="hidden lg:block text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-uin-blue transition">
-                                        Account
+                                        {{ __('messages.nav.account') }}
                                     </span>
                                 </a>
                             @else
                                 <div class="flex items-center gap-2">
                                     <a href="{{ route('login') }}" class="text-sm font-semibold text-gray-600 dark:text-gray-300 hover:text-uin-blue dark:hover:text-uin-yellow transition">
-                                        Log in
+                                        {{ __('messages.nav.login') }}
                                     </a>
                                     <a href="{{ route('register') }}" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-sm font-bold text-white bg-uin-blue rounded-lg hover:bg-blue-900 transition shadow-md shadow-blue-500/20">
-                                        Register
+                                        {{ __('messages.nav.register') }}
                                     </a>
                                 </div>
                             @endauth
@@ -97,34 +98,32 @@
                 <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
                     <div class="sm:text-center lg:text-left">
                         <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl">
-                            <span class="block xl:inline">Perpustakaan Digital</span>
-                            <span class="block text-uin-blue dark:text-uin-yellow">Fakultas Sains & Teknologi</span>
+                            <span class="block xl:inline">{{ __('messages.hero.title_1') }}</span>
+                            <span class="block text-uin-blue dark:text-uin-yellow">{{ __('messages.hero.title_2') }}</span>
                         </h1>
                         <p class="mt-3 text-base text-gray-500 dark:text-gray-400 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                            Temukan koleksi buku ajar, jurnal, dan karya ilmiah terbaik untuk mendukung studi Anda. Akses mudah di mana saja, kapan saja.
+                            {{ __('messages.hero.desc') }}
                         </p>
                         
                         <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                             <div class="rounded-md shadow">
                                 <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-uin-green hover:bg-green-700 md:py-4 md:text-lg transition-all transform hover:-translate-y-1">
-                                    Mulai Membaca
+                                    {{ __('messages.hero.cta_read') }}
                                 </a>
                             </div>
                             <div class="mt-3 sm:mt-0 sm:ml-3">
                                 <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-uin-blue bg-blue-100 hover:bg-blue-200 md:py-4 md:text-lg dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 transition">
-                                    Upload Karya
+                                    {{ __('messages.hero.cta_upload') }}
                                 </a>
                             </div>
                         </div>
-                        </div>
+                    </div>
                 </main>
             </div>
         </div>
         
         <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-blue-50 dark:bg-gray-800 flex items-center justify-center p-6 lg:p-0 overflow-hidden">
-            
             <div class="relative w-full h-64 sm:h-72 md:h-96 lg:h-full bg-uin-light/50 dark:bg-gray-700 overflow-hidden relative">
-                
                 <div class="absolute inset-0 opacity-30 dark:opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
                 
                 <div class="absolute top-[-10%] right-[-10%] w-64 h-64 bg-uin-yellow/30 rounded-full blur-3xl mix-blend-multiply dark:mix-blend-soft-light"></div>
@@ -144,11 +143,11 @@
         </div>
     </section>
 
-<section class="py-16 bg-white dark:bg-gray-950">
+    <section class="py-16 bg-white dark:bg-gray-950">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <h2 class="text-3xl md:text-4xl font-serif text-center text-gray-900 dark:text-white mb-12">
-                Recommended Right Now
+                {{ __('messages.rec.title') }}
             </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
@@ -166,10 +165,10 @@
 
                     <div>
                         <a href="#" class="inline-block text-lg md:text-xl font-bold text-gray-900 dark:text-white uppercase tracking-wide border-b-2 border-uin-yellow pb-1 hover:text-uin-blue transition-colors">
-                            THE NOTABLE AND AWARD-WINNING RESEARCH
+                            {{ __('messages.rec.card1_title') }}
                         </a>
                         <p class="mt-3 text-gray-600 dark:text-gray-400 text-base leading-relaxed">
-                            Kumpulan jurnal dosen dan skripsi mahasiswa FST yang berhasil menembus publikasi internasional terindeks Scopus tahun ini.
+                            {{ __('messages.rec.card1_desc') }}
                         </p>
                     </div>
                 </div>
@@ -187,10 +186,10 @@
 
                     <div>
                         <a href="#" class="inline-block text-lg md:text-xl font-bold text-gray-900 dark:text-white uppercase tracking-wide border-b-2 border-uin-blue dark:border-uin-yellow pb-1 hover:text-uin-blue dark:hover:text-uin-yellow transition-colors">
-                            ESSENTIAL TEXTBOOKS FOR THIS SEMESTER
+                            {{ __('messages.rec.card2_title') }}
                         </a>
                         <p class="mt-3 text-gray-600 dark:text-gray-400 text-base leading-relaxed">
-                            Persiapkan perkuliahan semester ganjil dengan koleksi buku ajar wajib dan modul praktikum yang telah dikurasi oleh program studi.
+                             {{ __('messages.rec.card2_desc') }}
                         </p>
                     </div>
                 </div>
@@ -199,7 +198,7 @@
         </div>
     </section>
 
-<section class="py-12 bg-white dark:bg-gray-950">
+    <section class="py-12 bg-white dark:bg-gray-950">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
 
@@ -216,13 +215,13 @@
 
                     <div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10">
                         <span class="text-uin-yellow font-bold tracking-[0.2em] text-sm md:text-base mb-4 uppercase border border-uin-yellow px-3 py-1 rounded-full backdrop-blur-sm">
-                            The Year in Research 2025
+                            {{ __('messages.feat.badge') }}
                         </span>
                         
                         <h2 class="text-5xl md:text-7xl lg:text-8xl text-white leading-[0.9]">
-                            <span class="font-serif block">SHARE</span>
-                            <span class="block text-3xl md:text-5xl font-light italic font-serif my-2 text-uin-light">THE</span>
-                            <span class="font-serif block">KNOWLEDGE</span>
+                            <span class="font-serif block">{{ __('messages.feat.share') }}</span>
+                            <span class="block text-3xl md:text-5xl font-light italic font-serif my-2 text-uin-light">{{ __('messages.feat.the') }}</span>
+                            <span class="font-serif block">{{ __('messages.feat.knowledge') }}</span>
                         </h2>
                     </div>
                 </div>
@@ -230,18 +229,17 @@
                 <div class="lg:col-span-4 bg-gray-50 dark:bg-gray-900 p-8 lg:p-10 rounded-2xl flex flex-col justify-center items-start border border-gray-100 dark:border-gray-800 shadow-sm">
                     
                     <h3 class="text-3xl md:text-4xl font-light text-gray-900 dark:text-white mb-6 leading-tight">
-                        Discover the <br>
-                        <span class="font-bold text-uin-blue dark:text-uin-yellow">Biggest Books of 2025</span>
+                        {!! __('messages.feat.subhead') !!}
                     </h3>
 
                     <p class="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-                        Bagikan keajaiban literasi dengan rekan mahasiswa! Jelajahi koleksi skripsi terbaik, jurnal terakreditasi, dan buku ajar pilihan dosen FST untuk semester ini.
+                        {{ __('messages.feat.desc') }}
                     </p>
 
                     <a href="#" class="group relative inline-flex items-center justify-start px-8 py-3 overflow-hidden font-bold transition-all bg-transparent border-2 border-uin-blue dark:border-uin-yellow rounded hover:bg-white group">
                         <span class="w-48 h-48 rounded rotate-[-40deg] bg-uin-blue dark:bg-uin-yellow absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
                         <span class="relative w-full text-left text-uin-blue dark:text-uin-yellow transition-colors duration-300 ease-in-out group-hover:text-white dark:group-hover:text-gray-900 uppercase tracking-widest text-sm">
-                            See The List
+                            {{ __('messages.feat.cta') }}
                         </span>
                     </a>
                 </div>
@@ -250,7 +248,7 @@
         </div>
     </section>
 
-<section class="py-12 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
+    <section class="py-12 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
         <div class="max-w-screen-xl mx-auto px-4">
             
             <div class="flex flex-col lg:flex-row gap-6 h-auto lg:h-96">
@@ -261,13 +259,12 @@
                     <div class="relative z-10">
                         <svg class="w-10 h-10 mb-4 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
                         <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white leading-tight mb-6 font-sans">
-                            TODAY'S <br>
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-uin-blue to-uin-green">TOP BOOKS</span>
+                            {!! __('messages.top.title') !!}
                         </h2>
                     </div>
 
                     <a href="#" class="relative z-10 inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-white transition-all duration-200 bg-gray-900 dark:bg-uin-blue rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-800 dark:hover:bg-blue-800">
-                        LIHAT GRAFIK
+                        {{ __('messages.top.cta_chart') }}
                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </a>
                 </div>
@@ -277,7 +274,7 @@
                     <div class="snap-center shrink-0 w-64 h-full bg-blue-50 dark:bg-gray-800 rounded-xl p-6 flex flex-col items-center justify-between hover:shadow-lg transition border border-transparent hover:border-uin-blue/20 cursor-pointer">
                         <div class="w-32 h-48 bg-gray-300 rounded shadow-md mb-4 bg-cover bg-center transition transform hover:scale-105" style="background-image: url('https://placehold.co/200x300/0F265C/white?text=Biologi+Dasar');"></div>
                         <div class="text-center mb-4">
-                            <h3 class="font-bold text-gray-900 dark:text-white text-lg leading-tight line-clamp-2">Pengantar Biologi Molekuler</h3>
+                            <h3 class="font-bold text-gray-900 dark:text-white text-lg leading-tight line-clamp-2">{{ __('messages.top.book1') }}</h3>
                             <p class="text-xs text-gray-500 mt-1">Dr. Ahmad S.Si</p>
                         </div>
                         <div class="w-10 h-10 rounded-full border-2 border-gray-900 dark:border-white flex items-center justify-center text-xl font-bold text-gray-900 dark:text-white">
@@ -288,7 +285,7 @@
                     <div class="snap-center shrink-0 w-64 h-full bg-green-50 dark:bg-gray-800 rounded-xl p-6 flex flex-col items-center justify-between hover:shadow-lg transition border border-transparent hover:border-uin-green/20 cursor-pointer">
                         <div class="w-32 h-48 bg-gray-300 rounded shadow-md mb-4 bg-cover bg-center transition transform hover:scale-105" style="background-image: url('https://placehold.co/200x300/009B4C/white?text=Algoritma');"></div>
                         <div class="text-center mb-4">
-                            <h3 class="font-bold text-gray-900 dark:text-white text-lg leading-tight line-clamp-2">Algoritma & Struktur Data</h3>
+                             <h3 class="font-bold text-gray-900 dark:text-white text-lg leading-tight line-clamp-2">{{ __('messages.top.book2') }}</h3>
                             <p class="text-xs text-gray-500 mt-1">Prodi TI</p>
                         </div>
                         <div class="w-10 h-10 rounded-full border-2 border-gray-900 dark:border-white flex items-center justify-center text-xl font-bold text-gray-900 dark:text-white">
@@ -299,7 +296,7 @@
                     <div class="snap-center shrink-0 w-64 h-full bg-yellow-50 dark:bg-gray-800 rounded-xl p-6 flex flex-col items-center justify-between hover:shadow-lg transition border border-transparent hover:border-uin-yellow/20 cursor-pointer">
                         <div class="w-32 h-48 bg-gray-300 rounded shadow-md mb-4 bg-cover bg-center transition transform hover:scale-105" style="background-image: url('https://placehold.co/200x300/FFC700/black?text=Kalkulus');"></div>
                         <div class="text-center mb-4">
-                            <h3 class="font-bold text-gray-900 dark:text-white text-lg leading-tight line-clamp-2">Kalkulus Lanjut II</h3>
+                             <h3 class="font-bold text-gray-900 dark:text-white text-lg leading-tight line-clamp-2">{{ __('messages.top.book3') }}</h3>
                             <p class="text-xs text-gray-500 mt-1">Matematika FST</p>
                         </div>
                         <div class="w-10 h-10 rounded-full border-2 border-gray-900 dark:border-white flex items-center justify-center text-xl font-bold text-gray-900 dark:text-white">
@@ -311,7 +308,7 @@
                         <a href="#" class="w-12 h-12 rounded-full bg-white border border-gray-200 shadow flex items-center justify-center hover:bg-gray-50 transition">
                             <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </a>
-                        <span class="text-xs font-medium text-gray-500 mt-2">Lihat Semua</span>
+                        <span class="text-xs font-medium text-gray-500 mt-2">{{ __('messages.top.view_all') }}</span>
                     </div>
 
                 </div>
@@ -320,12 +317,12 @@
         </div>
     </section>
 
-<section class="py-16 bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800">
+    <section class="py-16 bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-serif text-gray-900 dark:text-white mb-2">
-                    Kategori Koleksi
+                    {{ __('messages.cat.title') }}
                 </h2>
                 <div class="w-24 h-1 bg-uin-yellow mx-auto rounded-full"></div>
             </div>
@@ -338,7 +335,7 @@
                         <img src="https://placehold.co/150x220/0F265C/FFF?text=TI" alt="Informatika" class="w-2/3 shadow-xl transform group-hover:scale-110 transition duration-500 z-10 rotate-3">
                         <div class="absolute w-2/3 h-4/5 bg-gray-300 dark:bg-gray-700 top-8 left-4 rounded shadow-sm -z-0 rotate-[-5deg] opacity-70"></div>
                     </div>
-                    <h3 class="text-lg font-medium text-gray-900 dark:text-white text-center font-serif group-hover:text-uin-blue transition">Informatika</h3>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white text-center font-serif group-hover:text-uin-blue transition">{{ __('messages.cat.names.ti') }}</h3>
                 </div>
 
                 <div class="group cursor-pointer flex flex-col items-center">
@@ -347,7 +344,7 @@
                         <img src="https://placehold.co/150x220/009B4C/FFF?text=SI" alt="Sistem Informasi" class="w-2/3 shadow-xl transform group-hover:scale-110 transition duration-500 z-10 -rotate-2">
                         <div class="absolute w-2/3 h-4/5 bg-gray-300 dark:bg-gray-700 top-8 right-4 rounded shadow-sm -z-0 rotate-[4deg] opacity-70"></div>
                     </div>
-                    <h3 class="text-lg font-medium text-gray-900 dark:text-white text-center font-serif group-hover:text-uin-blue transition">Sistem Informasi</h3>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white text-center font-serif group-hover:text-uin-blue transition">{{ __('messages.cat.names.si') }}</h3>
                 </div>
 
                 <div class="group cursor-pointer flex flex-col items-center">
@@ -356,7 +353,7 @@
                         <img src="https://placehold.co/150x220/FFC700/000?text=MTK" alt="Matematika" class="w-2/3 shadow-xl transform group-hover:scale-110 transition duration-500 z-10 rotate-1">
                         <div class="absolute w-2/3 h-4/5 bg-gray-300 dark:bg-gray-700 top-6 left-6 rounded shadow-sm -z-0 rotate-[-3deg] opacity-70"></div>
                     </div>
-                    <h3 class="text-lg font-medium text-gray-900 dark:text-white text-center font-serif group-hover:text-uin-blue transition">Matematika</h3>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white text-center font-serif group-hover:text-uin-blue transition">{{ __('messages.cat.names.mtk') }}</h3>
                 </div>
 
                 <div class="group cursor-pointer flex flex-col items-center">
@@ -365,7 +362,7 @@
                         <img src="https://placehold.co/150x220/14b8a6/FFF?text=BIO" alt="Biologi" class="w-2/3 shadow-xl transform group-hover:scale-110 transition duration-500 z-10 rotate-3">
                          <div class="absolute w-2/3 h-4/5 bg-gray-300 dark:bg-gray-700 top-8 left-3 rounded shadow-sm -z-0 rotate-[-6deg] opacity-70"></div>
                     </div>
-                    <h3 class="text-lg font-medium text-gray-900 dark:text-white text-center font-serif group-hover:text-uin-blue transition">Biologi</h3>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white text-center font-serif group-hover:text-uin-blue transition">{{ __('messages.cat.names.bio') }}</h3>
                 </div>
 
                 <div class="group cursor-pointer flex flex-col items-center">
@@ -374,7 +371,7 @@
                         <img src="https://placehold.co/150x220/6366f1/FFF?text=FIS" alt="Fisika" class="w-2/3 shadow-xl transform group-hover:scale-110 transition duration-500 z-10 -rotate-2">
                         <div class="absolute w-2/3 h-4/5 bg-gray-300 dark:bg-gray-700 top-7 right-5 rounded shadow-sm -z-0 rotate-[3deg] opacity-70"></div>
                     </div>
-                    <h3 class="text-lg font-medium text-gray-900 dark:text-white text-center font-serif group-hover:text-uin-blue transition">Fisika</h3>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white text-center font-serif group-hover:text-uin-blue transition">{{ __('messages.cat.names.fis') }}</h3>
                 </div>
 
                 <div class="group cursor-pointer flex flex-col items-center">
@@ -383,14 +380,14 @@
                         <img src="https://placehold.co/150x220/f97316/FFF?text=KIM" alt="Kimia" class="w-2/3 shadow-xl transform group-hover:scale-110 transition duration-500 z-10 rotate-1">
                         <div class="absolute w-2/3 h-4/5 bg-gray-300 dark:bg-gray-700 top-6 left-5 rounded shadow-sm -z-0 rotate-[-2deg] opacity-70"></div>
                     </div>
-                    <h3 class="text-lg font-medium text-gray-900 dark:text-white text-center font-serif group-hover:text-uin-blue transition">Kimia</h3>
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white text-center font-serif group-hover:text-uin-blue transition">{{ __('messages.cat.names.kim') }}</h3>
                 </div>
 
             </div>
 
             <div class="text-center mt-12">
                 <a href="#" class="inline-block text-sm font-bold text-gray-900 dark:text-white uppercase tracking-widest border-b-2 border-gray-900 dark:border-white pb-1 hover:text-uin-blue hover:border-uin-blue transition-colors duration-300">
-                    Explore More Categories
+                    {{ __('messages.cat.explore') }}
                 </a>
             </div>
 
@@ -404,17 +401,17 @@
                 
                 <div class="mb-12 lg:mb-0 text-center lg:text-left">
                     <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
-                        <span class="block">Mau coba mulai ?</span>
-                        <span class="block text-uin-yellow mt-2">Publikasikan di Repository FST.</span>
+                        <span class="block">{{ __('messages.bottom.title_1') }}</span>
+                        <span class="block text-uin-yellow mt-2">{{ __('messages.bottom.title_2') }}</span>
                     </h2>
                     <p class="mt-4 text-lg text-blue-100 leading-relaxed max-w-lg mx-auto lg:mx-0">
-                        Bergabunglah dengan ribuan mahasiswa dan dosen FST lainnya. Bagikan karya ilmiah Anda dan perluas jangkauan akademik Anda hari ini.
+                         {{ __('messages.bottom.desc') }}
                     </p>
                     
                     <div class="mt-8 flex justify-center lg:justify-start">
                         <div class="inline-flex rounded-md shadow-lg">
                             <a href="#" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-md text-uin-blue bg-white hover:bg-gray-50 transition transform hover:-translate-y-1">
-                                Upload Sekarang
+                                {{ __('messages.bottom.cta') }}
                             </a>
                         </div>
                     </div>
@@ -435,92 +432,79 @@
         </div>
     </section>
 
-<footer class="bg-gray-900 text-white pt-12 pb-8 border-t border-gray-800">
-    <div class="max-w-screen-xl mx-auto px-4">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+    <footer class="bg-gray-900 text-white pt-12 pb-8 border-t border-gray-800">
+        <div class="max-w-screen-xl mx-auto px-4">
             
-            <div class="lg:col-span-2 space-y-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
                 
-                <div class="flex flex-wrap gap-x-8 gap-y-4 text-sm font-medium text-gray-300">
-                    <a href="#" class="hover:text-white transition">Tim Kami</a>
-                    <a href="#" class="hover:text-white transition">Berita FST</a>
-                    <a href="#" class="hover:text-white transition">Komunitas</a>
-                    <a href="#" class="hover:text-white transition">Bantuan</a>
-                    <a href="#" class="hover:text-white transition">Developers</a>
+                <div class="lg:col-span-2 space-y-8">
                     
-                    <div class="relative inline-block text-left group">
-                        <button type="button" class="flex items-center gap-1 hover:text-white transition">
-                            {{ app()->getLocale() == 'id' ? 'Bahasa Indonesia' : 'English' }}
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </button>
-                        <div class="absolute left-0 bottom-full mb-2 w-32 bg-white text-gray-900 rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                            <a href="/lang/id" class="block px-4 py-2 hover:bg-gray-100">Indonesia</a>
-                            <a href="/lang/en" class="block px-4 py-2 hover:bg-gray-100">English</a>
+                    <div class="flex flex-wrap gap-x-8 gap-y-4 text-sm font-medium text-gray-300">
+                        <a href="#" class="hover:text-white transition">{{ __('messages.footer.team') }}</a>
+                        <a href="#" class="hover:text-white transition">{{ __('messages.footer.news') }}</a>
+                        <a href="#" class="hover:text-white transition">{{ __('messages.footer.community') }}</a>
+                        <a href="#" class="hover:text-white transition">{{ __('messages.footer.help') }}</a>
+                        <a href="#" class="hover:text-white transition">{{ __('messages.footer.devs') }}</a>
+                        
+                        <div class="relative inline-block text-left group">
+                            <button type="button" class="flex items-center gap-1 hover:text-white transition">
+                                {{ app()->getLocale() == 'id' ? 'Bahasa Indonesia' : 'English' }}
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="absolute left-0 bottom-full mb-2 w-32 bg-white text-gray-900 rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                                <a href="/lang/id" class="block px-4 py-2 hover:bg-gray-100">Indonesia</a>
+                                <a href="/lang/en" class="block px-4 py-2 hover:bg-gray-100">English</a>
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="bg-gray-800 p-2 rounded-full hover:bg-uin-blue transition group">
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        </div>
+                </div>
+
+                <div>
+                    <h3 class="text-white text-base font-semibold mb-2">{{ __('messages.footer.news_title') }}</h3>
+                    <p class="text-gray-400 text-sm mb-4">{{ __('messages.footer.news_desc') }}</p>
+                    <form action="#" class="flex flex-col sm:flex-row gap-2">
+                        <input type="email" placeholder="{{ __('messages.footer.news_place') }}" class="w-full px-4 py-2.5 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-uin-green" required>
+                        <button type="submit" class="px-6 py-2.5 bg-uin-blue hover:bg-blue-800 text-white font-medium rounded-lg transition shadow-lg shadow-blue-500/20">
+                            {{ __('messages.footer.subscribe') }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                
+                <div class="flex items-center gap-6 opacity-80 grayscale hover:grayscale-0 transition duration-300">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-uin-yellow border-2 border-white flex items-center justify-center text-uin-blue font-bold text-xs">UIN</div>
+                        <span class="font-bold text-xl tracking-tight">Syarif Hidayatullah</span>
+                    </div>
+                    <div class="flex items-center gap-2 border-l border-gray-700 pl-6">
+                        <span class="font-mono text-lg font-semibold text-uin-green">FST<span class="text-white">DEV</span></span>
                     </div>
                 </div>
 
-                <div class="flex flex-wrap gap-4">
-                    <a href="#" class="bg-gray-800 p-2 rounded-full hover:bg-uin-blue transition group">
-                        <svg class="w-5 h-5 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    </a>
-                    <a href="#" class="bg-gray-800 p-2 rounded-full hover:bg-uin-blue transition group">
-                        <svg class="w-5 h-5 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
-                    </a>
-                    <a href="#" class="bg-gray-800 p-2 rounded-full hover:bg-uin-blue transition group">
-                        <svg class="w-5 h-5 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/></svg>
-                    </a>
-                    <a href="#" class="bg-gray-800 p-2 rounded-full hover:bg-uin-blue transition group">
-                        <svg class="w-5 h-5 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-                    </a>
-                    <a href="#" class="bg-gray-800 p-2 rounded-full hover:bg-uin-blue transition group">
-                        <svg class="w-5 h-5 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.64l-5.213-6.817-5.963 6.817h-3.31l7.591-8.678-8.163-10.822h6.805l4.897 6.474 5.414-6.474zm-1.161 17.52h1.833l-9.917-14.162h-1.968l10.052 14.162z"/></svg>
-                    </a>
+                <div class="text-center md:text-right">
+                    <div class="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 text-xs text-gray-500 font-medium mb-2">
+                        <a href="#" class="hover:text-gray-300">{{ __('messages.footer.privacy') }}</a>
+                        <a href="#" class="hover:text-gray-300">{{ __('messages.footer.terms') }}</a>
+                        <a href="#" class="hover:text-gray-300">{{ __('messages.footer.security') }}</a>
+                    </div>
+                    <p class="text-xs text-gray-600">
+                        {{ __('messages.footer.copyright') }}
+                    </p>
                 </div>
             </div>
 
-            <div>
-                <h3 class="text-white text-base font-semibold mb-2">Dapatkan Tips & Info Terbaru FST</h3>
-                <p class="text-gray-400 text-sm mb-4">Berlangganan newsletter untuk info jurnal dan buku baru. Bisa berhenti kapan saja.</p>
-                <form action="#" class="flex flex-col sm:flex-row gap-2">
-                    <input type="email" placeholder="Email mahasiswa/dosen..." class="w-full px-4 py-2.5 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-uin-green" required>
-                    <button type="submit" class="px-6 py-2.5 bg-uin-blue hover:bg-blue-800 text-white font-medium rounded-lg transition shadow-lg shadow-blue-500/20">
-                        Subscribe
-                    </button>
-                </form>
-            </div>
         </div>
+    </footer>
 
-        <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            
-            <div class="flex items-center gap-6 opacity-80 grayscale hover:grayscale-0 transition duration-300">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-full bg-uin-yellow border-2 border-white flex items-center justify-center text-uin-blue font-bold text-xs">UIN</div>
-                    <span class="font-bold text-xl tracking-tight">Syarif Hidayatullah</span>
-                </div>
-                <div class="flex items-center gap-2 border-l border-gray-700 pl-6">
-                    <span class="font-mono text-lg font-semibold text-uin-green">FST<span class="text-white">DEV</span></span>
-                </div>
-            </div>
-
-            <div class="text-center md:text-right">
-                <div class="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 text-xs text-gray-500 font-medium mb-2">
-                    <a href="#" class="hover:text-gray-300">Privacy Policy</a>
-                    <a href="#" class="hover:text-gray-300">Terms & Conditions</a>
-                    <a href="#" class="hover:text-gray-300">Security</a>
-                </div>
-                <p class="text-xs text-gray-600">
-                    Copyright © 2025 Fakultas Sains dan Teknologi UIN Jakarta. All rights reserved.
-                </p>
-            </div>
-        </div>
-
-    </div>
-</footer>
-
-<script>
-        // 1. Cek preferensi user saat load halaman (agar tidak kedip)
+    <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
@@ -530,23 +514,18 @@
         var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
-        // 2. Logika untuk memunculkan icon yang benar (Matahari vs Bulan)
-        // Tanpa ini, tombol akan terlihat kosong karena kedua icon di-set hidden by default
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            themeToggleLightIcon.classList.remove('hidden'); // Munculkan Matahari di mode gelap
+            themeToggleLightIcon.classList.remove('hidden');
         } else {
-            themeToggleDarkIcon.classList.remove('hidden'); // Munculkan Bulan di mode terang
+            themeToggleDarkIcon.classList.remove('hidden');
         }
 
         var themeToggleBtn = document.getElementById('theme-toggle');
 
-        // 3. Event Listener saat tombol diklik
         themeToggleBtn.addEventListener('click', function() {
-            // Toggle visibility icon
             themeToggleDarkIcon.classList.toggle('hidden');
             themeToggleLightIcon.classList.toggle('hidden');
 
-            // Cek kondisi sekarang dan balikkan (Light <-> Dark)
             if (localStorage.getItem('color-theme')) {
                 if (localStorage.getItem('color-theme') === 'light') {
                     document.documentElement.classList.add('dark');
@@ -566,6 +545,5 @@
             }
         });
     </script>
-
 </body>
 </html>
