@@ -26,6 +26,8 @@ return [
         'account'            => 'Akun',
         'login'              => 'Masuk',
         'register'           => 'Daftar',
+        'account' => 'Akun',
+        'logout' => 'Keluar',
     ],
 
     // --- LANDING PAGE: HERO SECTION ---
@@ -105,5 +107,56 @@ return [
         'terms'       => 'Syarat & Ketentuan',
         'security'    => 'Keamanan',
         'copyright'   => 'Hak Cipta © 2025 Fakultas Sains dan Teknologi UIN Jakarta. All rights reserved.',
+    ],
+
+    'dashboard' => [
+        'title' => 'Dashboard',
+        'my_collection' => 'Koleksi Saya',
+        'collection_desc' => 'Kelola buku dan karya ilmiah yang telah Anda upload.',
+        'upload_new' => 'Upload Buku Baru',
+        'success' => 'Berhasil!',
+        'no_cover' => 'Tidak Ada Sampul',
+        'read' => 'Baca',
+        'empty_title' => 'Belum ada buku',
+        'empty_desc' => 'Mulai upload karya ilmiah atau buku ajar Anda sekarang.',
+        'empty_action' => 'Upload Buku Pertama',
+    ],
+    'auth' => [
+        'logout' => 'Keluar',
+    ],
+
+    'upload' => [
+        'page_title' => 'Upload Buku - FST Library',
+        'header_title' => 'Upload Buku',
+        'cancel' => 'Batal',
+        'form_title' => 'Informasi Buku',
+        'label' => [
+            'title' => 'Judul Buku',
+            'author' => 'Penulis',
+            'category' => 'Kategori Prodi',
+            'cover' => 'Sampul Buku',
+            'file' => 'File Buku (.epub)',
+        ],
+        'drag' => [
+            'action' => 'Upload file gambar',
+            'or' => 'atau drag and drop',
+            'hint' => 'PNG, JPG, GIF (Maks 2MB)',
+            'remove' => 'Hapus & Ganti Gambar',
+        ],
+        'error' => [
+            'title' => 'Ukuran File Terlalu Besar!',
+            'desc' => 'Maksimal 2MB.',
+            'retry' => 'Coba Lagi',
+        ],
+        'submit' => 'Simpan & Upload Buku',
+    ],
+    'categories' => [
+        'informatika' => 'Teknik Informatika',
+        'sistem_informasi' => 'Sistem Informasi',
+        'matematika' => 'Matematika',
+        'biologi' => 'Biologi',
+        'fisika' => 'Fisika',
+        'kimia' => 'Kimia',
+        'agribisnis' => 'Agribisnis',
     ],
 ];

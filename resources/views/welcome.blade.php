@@ -112,7 +112,7 @@
                                 </a>
                             </div>
                             <div class="mt-3 sm:mt-0 sm:ml-3">
-                                <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-uin-blue bg-blue-100 hover:bg-blue-200 md:py-4 md:text-lg dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 transition">
+                                <a href="{{ route('books.create') }}" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-uin-blue bg-blue-100 hover:bg-blue-200 md:py-4 md:text-lg dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 transition">
                                     {{ __('messages.hero.cta_upload') }}
                                 </a>
                             </div>
@@ -410,7 +410,7 @@
                     
                     <div class="mt-8 flex justify-center lg:justify-start">
                         <div class="inline-flex rounded-md shadow-lg">
-                            <a href="#" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-md text-uin-blue bg-white hover:bg-gray-50 transition transform hover:-translate-y-1">
+                            <a href="{{ route('books.create') }}" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-md text-uin-blue bg-white hover:bg-gray-50 transition transform hover:-translate-y-1">
                                 {{ __('messages.bottom.cta') }}
                             </a>
                         </div>

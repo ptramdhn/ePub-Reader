@@ -32,7 +32,8 @@
     </script>
 
     <script>
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        // Gunakan key 'color-theme' agar sinkron dengan Landing Page & Login
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark');
@@ -41,10 +42,10 @@
         function toggleTheme() {
             if (document.documentElement.classList.contains('dark')) {
                 document.documentElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
+                localStorage.setItem('color-theme', 'light');
             } else {
                 document.documentElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
+                localStorage.setItem('color-theme', 'dark');
             }
         }
     </script>

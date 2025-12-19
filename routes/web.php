@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookController;
+use App\Models\Book;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,6 +32,18 @@ Route::middleware('guest')->group(function () { // <--- Tambahkan Route::
 Route::middleware('auth')->group(function () { // <--- Tambahkan Route::
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', function () {
-        return view('dashboard'); 
+        // Ambil buku yang di-upload oleh user yang sedang login, urutkan dari yang terbaru
+        $books = Book::where('user_id', Auth::id())->latest()->get();
+
+        return view('dashboard', compact('books'));
     })->name('dashboard');
+
+    // Route untuk upload Buku
+    Route::get('/books/upload', [BookController::class, 'create'])->name('books.create');
+    Route::post('/books', [BookController::class, 'store'])->name('books.store');
+
+    // Route Baca Buku
+    Route::get('/books/{book}/read', function (Book $book) {
+        return view('books.read', compact('book'));
+    })->name('books.read');
 });
