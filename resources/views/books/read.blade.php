@@ -269,7 +269,7 @@
         });
 
         function saveHistory(cfi) {
-            fetch("{{ route('books.history', $book->id) }}", {
+            fetch("/books/{{ $book->id }}/history", {
                 method: "POST",
                 headers: { 
                     "Content-Type": "application/json", 
