@@ -44,6 +44,16 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
 });
 
+Route::middleware(['auth'])->group(function () {
+    
+    // ... route lainnya ...
+
+    // Route untuk Dashboard Statistik
+    Route::get('/api/stats', [BookController::class, 'getStats'])->name('api.stats');
+
+    // Route untuk Save History (Pastikan ini juga ada)
+    Route::post('/books/{book}/history', [BookController::class, 'saveHistory'])->name('books.history');
+});
 
 // --- 3. HALAMAN USER & UMUM (Wajib Login) ---
 Route::middleware('auth')->group(function () {

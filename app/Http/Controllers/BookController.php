@@ -12,6 +12,24 @@ use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
+    // Tampilkan Daftar Buku (Halaman Depan Library)
+    public function index(Request $request)
+    {
+        // Ambil buku yang statusnya 'approved' saja
+        $query = Book::where('status', 'approved')->with('user');
+
+        // Fitur Pencarian (Opsional)
+        if ($request->has('search')) {
+            $query->where('title', 'like', '%' . $request->search . '%')
+                  ->orWhere('author', 'like', '%' . $request->search . '%');
+        }
+
+        // Tampilkan 12 buku per halaman
+        $books = $query->latest()->paginate(12);
+
+        return view('books.index', compact('books'));
+    }
+    
     // 1. Tampilkan Form Upload
     public function create()
     {
@@ -75,18 +93,29 @@ class BookController extends Controller
     // Ini dipanggil saat user scroll/pindah bab di read.blade.php
     public function saveHistory(Request $request, $id)
     {
+        // 1. Validasi input dari JavaScript
         $request->validate([
-            'last_location' => 'required|string', // Menerima data dari JS
+            'last_location' => 'required|string',
+            'percentage'    => 'required|numeric', // Terima persentase
+            'duration'      => 'nullable|integer', // Terima durasi (detik)
         ]);
 
-        // Kita gunakan Model ReadingProgress yang sudah Anda miliki
-        ReadingProgress::updateOrCreate(
-            ['user_id' => Auth::id(), 'book_id' => $id],
-            [
-                'last_cfi' => $request->last_location, // Simpan posisi halaman (CFI)
-                'updated_at' => now() // Update waktu terakhir baca
-            ]
-        );
+        // 2. Cari atau Buat Progress Baru
+        $progress = ReadingProgress::firstOrNew([
+            'user_id' => Auth::id(),
+            'book_id' => $id
+        ]);
+
+        // 3. Update Data
+        $progress->last_cfi = $request->last_location;
+        $progress->percentage = $request->percentage; // Simpan progres %
+        
+        // Tambahkan durasi baru ke total durasi yang sudah ada
+        // (total_seconds harus ada di database tabel reading_progress)
+        $progress->total_seconds = ($progress->total_seconds ?? 0) + ($request->duration ?? 0);
+        
+        $progress->updated_at = now();
+        $progress->save();
 
         return response()->json(['status' => 'success']);
     }

@@ -268,7 +268,30 @@
             }, 1000);
         });
 
+        // --- 1. Tambahkan Variabel Timer di Luar Fungsi ---
+        let startTime = Date.now(); // Waktu mulai saat halaman dibuka
+
+        // ... kode konfigurasi rendition ...
+
+        rendition.on("relocated", location => {
+            updateBookmarkButton(location);
+
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                saveHistory(location.start.cfi);
+            }, 1000);
+        });
+
         function saveHistory(cfi) {
+            // --- 2. Hitung Durasi Baca ---
+            let currentTime = Date.now();
+            // Hitung selisih waktu (dalam detik)
+            let durationSeconds = Math.round((currentTime - startTime) / 1000);
+            
+            // Reset timer agar perhitungan berikutnya dimulai dari 0 lagi
+            startTime = currentTime;
+
+            // --- 3. Kirim Data ke Server ---
             fetch("/books/{{ $book->id }}/history", {
                 method: "POST",
                 headers: { 
@@ -277,7 +300,9 @@
                 },
                 body: JSON.stringify({ 
                     last_location: cfi,
-                    percentage: book.locations.percentageFromCfi(cfi) // Opsional: Simpan persentase baca
+                    // Hitung persentase progress (0.0 - 1.0) lalu kali 100 biar jadi persen (0-100)
+                    percentage: book.locations.percentageFromCfi(cfi) * 100, 
+                    duration: durationSeconds // <--- INI DATA BARU YANG DIBUTUHKAN CONTROLLER
                 })
             }).then(response => {
                 if (!response.ok) console.error("Gagal menyimpan history");
