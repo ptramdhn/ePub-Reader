@@ -302,9 +302,9 @@
                     <div>
                         <p class="text-blue-100 text-xs font-medium uppercase tracking-wider">{{ __('messages.dashboard.stat_time') }}</p>
                         <h2 class="text-3xl font-bold mt-1">
-                            <span id="stat-time">{{ $stats['total_hours'] }}</span> 
+                            <span id="stat-time" class="tracking-tight">{{ $stats['total_hours'] }}</span> 
                             <span class="text-lg font-normal opacity-80">{{ __('messages.dashboard.unit_hours') }}</span>
-                        </h2>
+                        </h2> 
                     </div>
                     <div class="bg-white/20 p-3 rounded-full">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>

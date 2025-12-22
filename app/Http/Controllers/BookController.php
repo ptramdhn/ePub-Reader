@@ -15,25 +15,43 @@ class BookController extends Controller
     // Tampilkan Daftar Buku (Halaman Depan Library)
     public function index(Request $request)
     {
-        // Ambil buku yang statusnya 'approved' saja
-        $query = Book::where('status', 'approved')->with('user');
+        $user = Auth::user();
+        
+        // Ambil Mode dari Session (Reader/Creator/Admin)
+        $mode = session('dashboard_mode', 'reader'); 
 
-        // Fitur Pencarian (Opsional)
-        if ($request->has('search')) {
-            $query->where('title', 'like', '%' . $request->search . '%')
-                  ->orWhere('author', 'like', '%' . $request->search . '%');
-        }
+        // --- LOGIC STATISTIK READER (YANG KAMU TANYAKAN) ---
+        
+        // 1. Ambil semua progress baca user ini
+        $userProgress = ReadingProgress::where('user_id', $user->id)->get();
 
-        // Tampilkan 12 buku per halaman
-        $books = $query->latest()->paginate(12);
+        // 2. Hitung total detik
+        $totalSeconds = $userProgress->sum('total_seconds');
 
-        return view('books.index', compact('books'));
-    }
-    
-    // 1. Tampilkan Form Upload
-    public function create()
-    {
-        return view('books.create');
+        // 3. Konversi ke Jam dengan Desimal (PENTING)
+        // number_format(angka, jumlah_desimal)
+        // Contoh: 5400 detik / 3600 = 1.50 Jam
+        $totalHours = number_format($totalSeconds / 3600, 2); 
+
+        // 4. Siapkan Array Stats
+        $stats = [
+            // Statistik Reader
+            'total_hours'  => $totalHours, // <--- HASIL DESIMAL DISIMPAN DI SINI
+            'books_read'   => $userProgress->count(),
+            'avg_progress' => round($userProgress->avg('percentage') ?? 0, 0),
+
+            // Statistik Creator/Admin (Biarkan tetap ada agar tidak error)
+            'total_users'   => User::count(),
+            'total_uploads' => Book::count(), // Sesuaikan filter jika perlu
+            'approved'      => Book::where('status', 'approved')->count(),
+            'rejected'      => Book::where('status', 'rejected')->count(),
+            'pending'       => Book::where('status', 'pending')->count(),
+        ];
+
+        // Query Buku (Sesuaikan dengan logic dashboard kamu sebelumnya)
+        $books = Book::latest()->take(5)->get(); 
+
+        return view('dashboard', compact('stats', 'books', 'mode'));
     }
 
     // 2. Proses Simpan Data ke Database & Server
@@ -129,7 +147,11 @@ class BookController extends Controller
         $totalSeconds = $userProgress->sum('total_seconds');
 
         return response()->json([
-            'total_hours' => round($totalSeconds / 3600, 1),
+            // UBAH BARIS INI:
+            // Gunakan number_format untuk memaksa 2 angka di belakang koma (misal: 1.25)
+            // Parameter: (angka, jumlah_desimal)
+            'total_hours' => number_format($totalSeconds / 3600, 2), 
+            
             'books_read' => $userProgress->count(),
             'avg_progress' => round($userProgress->avg('percentage') ?? 0, 0)
         ]);
