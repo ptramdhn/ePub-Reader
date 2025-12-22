@@ -12,12 +12,18 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
 
-        // 1. Middleware Global untuk Grup 'Web' (Jalan di semua halaman)
+        // --- MULAI TAMBAHAN PENTING ---
+        // Memberitahu Laravel untuk mempercayai Load Balancer Railway
+        // Ini akan memperbaiki error "Not Secure" saat login dan masalah HTTP vs HTTPS
+        $middleware->trustProxies(at: '*');
+        // --- SELESAI TAMBAHAN PENTING ---
+
+        // 1. Middleware Global untuk Grup 'Web'
         $middleware->web(append: [
             \App\Http\Middleware\SetLocale::class,
         ]);
 
-        // 2. Middleware Alias (Hanya jalan jika dipanggil di route)
+        // 2. Middleware Alias
         $middleware->alias([
             'admin' => \App\Http\Middleware\IsAdmin::class,
         ]);
